@@ -19,17 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           # yarnのキャッシュを効かすために設定 (npmのかたはnpmで)
           
       - name: npm install
         run: npm install
-      - name: npm build
-        run: npm build
+      - name: npm run build
+        run: npm run build
         # GIthubページは https://USERNAME.github.io/REPOSITORY_NAME/
         # となるので、envを追加してviteのベースパスを変えるように設定します。
         env:
