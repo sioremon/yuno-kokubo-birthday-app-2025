@@ -1,0 +1,50 @@
+name: deploy static content to Pages
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'public/**'
+      - '.github/workflows/github-pages.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: read
+
+jobs:
+  deploy:
+    environment:
+        name: github-pages
+        url: https://${{ github.repository_owner }}.github.io/${{ github.repository_name }}
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+          working-directory: ./src
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install  
+      
+      - name: Build
+        run: npm run build
+
+      - name: setup pages
+        uses: actions/configure-pages@v5
+      
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: './public'
+      
+      - name: deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
