@@ -156,7 +156,7 @@ function App() {
           <li>Twitter: <a href="https://x.com/hellootakuworld?t=BkjXIurUBGTKpuXJ2ytlmw&s=09">@hellootakuworld</a></li>
           <li>GitHub: <a href="https://github.com/sioremon">@sioremon</a></li>
           <li>Mail: <a href="mailto:sioremon@sioremon.dev">sioremon [at] sioremon.dev</a></li>
-          <li>Repository<a href="https://github.com/sioremon/instagram-birthday-event-demo-app">sioremon/instagram-birthday-event-demo-app</a></li>
+          <li>Repository: <a href="https://github.com/sioremon/instagram-birthday-event-demo-app">sioremon/instagram-birthday-event-demo-app</a></li>
         </ul>
       </div>
     </>
