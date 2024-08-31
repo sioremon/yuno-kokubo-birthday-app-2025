@@ -135,8 +135,8 @@ function App() {
           <option value="60">60px</option>
           <option value="70">70px</option>
           <option value="80">80px</option>
-          <option value="90">90px</option>
-          <option value="100">100px</option>
+          {/* <option value="90">90px</option> */}
+          {/* <option value="100">100px</option> */}
         </select>
         <h2>メッセージを入力してください</h2>
         <textarea onChange={triggerOnChangeEvent} maxLength={219}></textarea>
