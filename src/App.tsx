@@ -118,8 +118,8 @@ function App() {
       >
           <Layer>
           {Card()}
-          <Text text={message} fontSize={messagefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/6} y={stageSize/3.5} width={stageSize/1.2} height={stageSize/1.2} draggable={true}/>
-          <Text text={name} fontSize={namefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/2} y={stageSize/2} width={stageSize/1.2} height={stageSize/1.2} draggable={true}/>
+          <Text text={message} fontSize={messagefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/6} y={stageSize/3.5} width={1080} height={1080} draggable={true}/>
+          <Text text={name} fontSize={namefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/2} y={stageSize/2} width={1080} height={1080} draggable={true}/>
           </Layer>
         </Stage>
       </div>
