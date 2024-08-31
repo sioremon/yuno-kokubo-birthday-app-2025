@@ -104,7 +104,7 @@ function App() {
       <p id="proto-notice">このページはプロトタイプです. 2023年版の画像を使用しています. </p>
       <p>莉子ちゃんの生誕企画のメッセージカードを作成できます!</p>
       <p>メッセージは219文字まで入力できます</p>
-      <p>1行18文字を目安に改行してください</p>
+      <p>1行18文字を目安に改行してください(40pxの場合)</p>
       <p>表示された文字は画像の中で動かすことができます</p>
       <p>メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください</p>
       <Stage 
@@ -117,7 +117,7 @@ function App() {
           <Layer>
           {Card()}
           <Text text={message} fontSize={messagefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/6} y={stageSize/3.5} width={stageSize/1.2} height={stageSize/1.2} draggable={true}/>
-          <Text text={name} fontSize={namefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/5} y={stageSize} width={stageSize/1.2} height={stageSize/4} draggable={true}/>
+          <Text text={name} fontSize={namefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/2} y={stageSize/2} width={stageSize/1.2} height={stageSize/1.2} draggable={true}/>
           </Layer>
         </Stage>
       </div>
