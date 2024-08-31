@@ -66,6 +66,11 @@ p, select{
   font-size: 20px;
 }
 
+#proto-notice {
+  color: red;
+  font-size: 40px;
+}
+
 ul {
   list-style: none;
   font-size: 20px;
