@@ -146,7 +146,7 @@ function App() {
         <p id="notice">このページは私立恵比寿中学のファン有志によって作成されました. 私立恵比寿中学公式とは無関係です</p>
         <p>Contact</p>
         <ul>
-          <li>Twitter: <a href="https://x.com/hellootakuworld?t=BkjXIurUBGTKpuXJ2ytlmw&s=09">@hellootakuworld</a></li>
+          {/* <li>Twitter: <a href="https://x.com/hellootakuworld?t=BkjXIurUBGTKpuXJ2ytlmw&s=09">@hellootakuworld</a></li> */}
           <li>GitHub: <a href="https://github.com/sioremon">@sioremon</a></li>
           <li>Mail: <a href="mailto:sioremon@sioremon.dev">sioremon [at] sioremon.dev</a></li>
         </ul>
