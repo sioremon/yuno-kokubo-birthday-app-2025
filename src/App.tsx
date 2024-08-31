@@ -19,14 +19,18 @@ function App() {
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messagefontSize, setMessageFontSize] = useState(40)
   const [namefontSize, setNameFontSize] = useState(40)
-  // メッセージのフォントサイズを取得する
-  // selectタグのonChangeイベントで呼び出される
+
+  // メッセージカードのフォントサイズを変更する関数
   function onMessageFontSizeChange(e: React.ChangeEvent<HTMLSelectElement>){
     setMessageFontSize(Number(e.target.value))
   }
+
+  // 名前のフォントサイズを変更する関数
   function onNameFontSizeChange(e: React.ChangeEvent<HTMLSelectElement>){
     setNameFontSize(Number(e.target.value))
   }
+
+  // テキストエリアに入力されたテキストを読み取り, メッセージカードのテキストを更新する関数
   function triggerOnChangeEvent(e: React.ChangeEvent<HTMLTextAreaElement>){
     setMessage(e.target.value)
     if(!isValidTextLength(message)){
@@ -38,6 +42,7 @@ function App() {
     }
   }
 
+  // メッセージカードをダウンロードする関数
   const download = () => {
     if (!stageRef.current) {
       return;
@@ -56,17 +61,20 @@ function App() {
     const textArray = text.split('\n')
     return textArray.every((line) => line.length <= LINE_LENGTH)
   }
+
   // isValidLineLengthがfalseの場合, メッセージカードのテキストが18文字以上の行を含んでいることを示すメッセージを表示する
   const errMessage = () =>{
     if(!isValidLineLength){
       return <p id="warn">1行は18文字以内にしてください</p>
     }
   }
-
+  // カードの画像を読み込む関数
   const Card = () =>{ // Rename 'card' to 'Card'
     const [img] = useImage(card1) // Change type of 'img' to 'HTMLImageElement | undefined'
     return <Image image={img} />
   }
+
+
   useEffect(() => {
     if (divRef.current){
     return setStageSize(divRef.current?.clientWidth || 0);
@@ -74,7 +82,7 @@ function App() {
   }, [width]);
   
   const scale = stageSize / BASE_SIZE;
-
+  
   useEffect(() => {
     const loadFont = async () => {
       const font = new FontFace('Yusei Magic', 'url(https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap)')
@@ -89,7 +97,6 @@ function App() {
     loadFont()
   }, [])
   
-
   return (
     <>
     <div ref={divRef}>
