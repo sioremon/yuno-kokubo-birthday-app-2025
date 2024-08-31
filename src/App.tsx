@@ -102,7 +102,7 @@ function App() {
     <div ref={divRef}>
       <h1>中山莉子生誕企画 メッセージカード</h1>
       <p id="proto-notice">このページはプロトタイプです. 2023年版の画像を使用しています. </p>
-      <p id="proto-notice">端末によっては文字が期待通りに表示されない場合があります(修正中)</p>
+      <p id="proto-notice">端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
       <p>莉子ちゃんの生誕企画のメッセージカードを作成できます!</p>
       <p>メッセージは219文字まで入力できます</p>
       <p>1行18文字を目安に改行してください(40pxの場合)</p>
@@ -149,7 +149,7 @@ function App() {
           <option value="70">70px</option>
           <option value="80">80px</option>
           <option value="90">90px</option>
-          <option value="100">100px</option>
+          {/* <option value="100">100px</option> */}
         </select>
         <p><button onClick={download}>ダウンロード!</button></p>
       </div>
