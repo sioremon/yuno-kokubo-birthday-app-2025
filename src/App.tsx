@@ -82,7 +82,7 @@ function App() {
   }, [width]);
   
   const scale = stageSize / BASE_SIZE;
-  
+
   useEffect(() => {
     const loadFont = async () => {
       const font = new FontFace('Yusei Magic', 'url(https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap)')
@@ -156,6 +156,7 @@ function App() {
           <li>Twitter: <a href="https://x.com/hellootakuworld?t=BkjXIurUBGTKpuXJ2ytlmw&s=09">@hellootakuworld</a></li>
           <li>GitHub: <a href="https://github.com/sioremon">@sioremon</a></li>
           <li>Mail: <a href="mailto:sioremon@sioremon.dev">sioremon [at] sioremon.dev</a></li>
+          <li>Repository<a href="https://github.com/sioremon/instagram-birthday-event-demo-app">sioremon/instagram-birthday-event-demo-app</a></li>
         </ul>
       </div>
     </>
