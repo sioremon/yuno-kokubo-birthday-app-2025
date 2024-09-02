@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from 'react'
 import card1 from './assets/riko_birthday_card_1.jpg'
-import './App.css'
 import {Stage, Layer, Image, Text} from 'react-konva'
 import useImage from 'use-image'
 import { useWindowSize } from 'react-use'
 import Konva from 'konva'
+import './App.css'
 
 function App() {
   const BASE_SIZE = 1080
