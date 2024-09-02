@@ -18,7 +18,7 @@ function App() {
   const stageRef = useRef<Konva.Stage>(null)
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messageFontSize, setMessageFontSize] = useState(40)
-  const [nameFontSize, setNameFontSize] = useState(40)
+  const [nameFontSize, setNameFontSize] = useState(20)
 
   // メッセージカードのフォントサイズを変更する関数
   function onMessageFontSizeChange(e: React.ChangeEvent<HTMLSelectElement>){
