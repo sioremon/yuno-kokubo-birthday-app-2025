@@ -17,8 +17,8 @@ function App() {
   const {width} = useWindowSize()
   const stageRef = useRef<Konva.Stage>(null)
   const [isValidLineLength, setIsValidLineLength] = useState(true)
-  const [messagefontSize, setMessageFontSize] = useState(40)
-  const [namefontSize, setNameFontSize] = useState(40)
+  const [messageFontSize, setMessageFontSize] = useState(40)
+  const [nameFontSize, setNameFontSize] = useState(40)
 
   // メッセージカードのフォントサイズを変更する関数
   function onMessageFontSizeChange(e: React.ChangeEvent<HTMLSelectElement>){
@@ -118,8 +118,8 @@ function App() {
       >
           <Layer>
           {Card()}
-          <Text text={message} fontSize={messagefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/6} y={stageSize/3.5} width={1080} height={1080} draggable={true}/>
-          <Text text={name} fontSize={namefontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/2} y={stageSize/2} width={1080} height={1080} draggable={true}/>
+          <Text text={message} fontSize={messageFontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/6} y={stageSize/3.5} width={1080} height={1080} draggable={true}/>
+          <Text text={name} fontSize={nameFontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/2} y={stageSize/2} width={1080} height={1080} draggable={true}/>
           </Layer>
         </Stage>
       </div>
