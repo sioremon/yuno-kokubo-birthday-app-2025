@@ -83,19 +83,7 @@ function App() {
   
   const scale = stageSize / BASE_SIZE;
 
-  // useEffect(() => {
-  //   const loadFont = async () => {
-  //     const font = new FontFace('uzura', 'url(./assets/fonts/uzura.ttf)')
-  //     await font.load()
-  //     document.fonts.add(font)
-      
-  //     // Redraw the canvas once the font is loaded
-  //     if (stageRef.current) {
-  //       stageRef.current.draw()
-  //     }
-  //   }
-  //   loadFont()
-  // }, [])
+
   
   return (
     <>
