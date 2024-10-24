@@ -21,17 +21,17 @@ function App() {
   const [nameFontSize, setNameFontSize] = useState(20)
 
   // メッセージカードのフォントサイズを変更する関数
-  function onMessageFontSizeChange(e: React.ChangeEvent<HTMLSelectElement>){
+  const onMessageFontSizeChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
     setMessageFontSize(Number(e.target.value))
   }
 
   // 名前のフォントサイズを変更する関数
-  function onNameFontSizeChange(e: React.ChangeEvent<HTMLSelectElement>){
+  const onNameFontSizeChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
     setNameFontSize(Number(e.target.value))
   }
 
   // テキストエリアに入力されたテキストを読み取り, メッセージカードのテキストを更新する関数
-  function triggerOnChangeEvent(e: React.ChangeEvent<HTMLTextAreaElement>){
+  const triggerOnChangeEvent = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
     setMessage(e.target.value)
     if(!isValidTextLength(message)){
       setIsValidLineLength(false)
@@ -57,7 +57,7 @@ function App() {
 
 
   // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
-  function isValidTextLength(text: string) {
+  const isValidTextLength=(text: string)=> {
     const textArray = text.split('\n')
     return textArray.every((line) => line.length <= LINE_LENGTH)
   }
