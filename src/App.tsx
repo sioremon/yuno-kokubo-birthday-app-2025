@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef,useCallback } from 'react'
 import card1 from './assets/2024_message_card.jpg'
 import {Stage, Layer, Image, Text} from 'react-konva'
 import useImage from 'use-image'
@@ -8,7 +8,7 @@ import './App.css'
 
 function App() {
   const BASE_SIZE = 1280
-  const LINE_LENGTH = 18
+  const LINE_LENGTH = 27
 
   const [message, setMessage] = useState('')
   const [name, setName] = useState('')
@@ -21,29 +21,31 @@ function App() {
   const [nameFontSize, setNameFontSize] = useState(20)
 
   // メッセージカードのフォントサイズを変更する関数
-  const onMessageFontSizeChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
+  const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
     setMessageFontSize(Number(e.target.value))
-  }
+  },[])
 
   // 名前のフォントサイズを変更する関数
-  const onNameFontSizeChange = (e: React.ChangeEvent<HTMLSelectElement>)=>{
+  const onNameFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
     setNameFontSize(Number(e.target.value))
-  }
+  }, [])
 
   // テキストエリアに入力されたテキストを読み取り, メッセージカードのテキストを更新する関数
-  const triggerOnChangeEvent = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+  const triggerOnChangeEvent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>)=>{
     setMessage(e.target.value)
-    if(!isValidTextLength(message)){
-      setIsValidLineLength(false)
-      console.log(isValidLineLength)
-    }else{
-      setIsValidLineLength(true)
-      console.log(isValidLineLength)
+  }, [])
+    // messageの状態管理をuseEffectで行う
+  useEffect(() => {
+    if (!isValidTextLength(message)) {
+      setIsValidLineLength(false);
+      console.log(isValidLineLength);
+    } else {
+      setIsValidLineLength(true);
+      console.log(isValidLineLength);
     }
-  }
-
+  }, [isValidLineLength, message]);
   // メッセージカードをダウンロードする関数
-  const download = () => {
+  const download = useCallback(() => {
     if (!stageRef.current) {
       return;
     }
@@ -53,21 +55,14 @@ function App() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
+  }, [stageRef]);
 
 
   // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
   const isValidTextLength=(text: string)=> {
-    const textArray = text.split('\n')
-    return textArray.every((line) => line.length <= LINE_LENGTH)
+    return [...text].length <= LINE_LENGTH
   }
 
-  // isValidLineLengthがfalseの場合, メッセージカードのテキストが18文字以上の行を含んでいることを示すメッセージを表示する
-  const errMessage = () =>{
-    if(!isValidLineLength){
-      return <p id="warn">1行は18文字以内にしてください</p>
-    }
-  }
   // カードの画像を読み込む関数
   const Card = () =>{ // Rename 'card' to 'Card'
     const [img] = useImage(card1) // Change type of 'img' to 'HTMLImageElement | undefined'
@@ -113,7 +108,7 @@ function App() {
       </div>
       <div className="card">
         <h2>名前を入力してください</h2>
-        <textarea onChange={(e) => setName(e.target.value)} maxLength={45} />
+        <textarea onChange={(e) => setName(e.target.value)} maxLength={45}></textarea>
         <h2>名前のフォントサイズを選択してください</h2>
         <select onChange={onNameFontSizeChange}>
           <option value="20">20px</option>
@@ -128,7 +123,7 @@ function App() {
         </select>
         <h2>メッセージを入力してください</h2>
         <textarea onChange={triggerOnChangeEvent} maxLength={219}></textarea>
-        {errMessage()}
+        {!isValidLineLength && <p id="warn">(40pxの場合)1行は27文字以内にしてください</p>}
         <h2>メッセージのフォントサイズを選択してください</h2>
         <select onChange={onMessageFontSizeChange}>
           <option value="40">40px</option>
@@ -137,7 +132,6 @@ function App() {
           <option value="70">70px</option>
           <option value="80">80px</option>
           <option value="90">90px</option>
-          {/* <option value="100">100px</option> */}
         </select>
         <p><button onClick={download}>ダウンロード!</button></p>
       </div>
