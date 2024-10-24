@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import card1 from './assets/riko_birthday_card_1.jpg'
+import card1 from './assets/2024_message_card.jpg'
 import {Stage, Layer, Image, Text} from 'react-konva'
 import useImage from 'use-image'
 import { useWindowSize } from 'react-use'
@@ -7,7 +7,7 @@ import Konva from 'konva'
 import './App.css'
 
 function App() {
-  const BASE_SIZE = 1080
+  const BASE_SIZE = 1280
   const LINE_LENGTH = 18
 
   const [message, setMessage] = useState('')
@@ -101,7 +101,6 @@ function App() {
     <>
     <div ref={divRef}>
       <h1>中山莉子生誕企画 メッセージカード</h1>
-      <p id="proto-notice">このページはプロトタイプです. 2023年版の画像を使用しています. </p>
       <p id="proto-notice">端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
       <p>推奨ブラウザはChromeです. Safari上では期待通りに動作しない可能性があります. </p>
       <p>莉子ちゃんの生誕企画のメッセージカードを作成できます!</p>
