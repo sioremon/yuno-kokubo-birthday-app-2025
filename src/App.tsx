@@ -8,7 +8,7 @@ import './App.css'
 
 function App() {
   const BASE_SIZE = 1280
-  const LINE_LENGTH = 27
+  const LINE_LENGTH = 17
 
   const [message, setMessage] = useState('')
   const [name, setName] = useState('')
@@ -17,7 +17,7 @@ function App() {
   const {width} = useWindowSize()
   const stageRef = useRef<Konva.Stage>(null)
   const [isValidLineLength, setIsValidLineLength] = useState(true)
-  const [messageFontSize, setMessageFontSize] = useState(40)
+  const [messageFontSize, setMessageFontSize] = useState(60)
   const [nameFontSize, setNameFontSize] = useState(20)
 
   // メッセージカードのフォントサイズを変更する関数
@@ -60,9 +60,12 @@ function App() {
 
   // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
   const isValidTextLength=(text: string)=> {
-    return [...text].length <= LINE_LENGTH
+    // 1行あたりの文字数をカウントする
+    const lines = text.split('\n');
+    // スプレッド演算子で配列を展開し, 1行あたりの文字数をカウントする
+    const lineLengths = lines.map((line) => line.length);
+    return lineLengths.every((lineLength) => lineLength <= LINE_LENGTH);
   }
-
   // カードの画像を読み込む関数
   const Card = () =>{ // Rename 'card' to 'Card'
     const [img] = useImage(card1) // Change type of 'img' to 'HTMLImageElement | undefined'
@@ -123,10 +126,10 @@ function App() {
           {/* <option value="100">100px</option> */}
         </select>
         <h2>メッセージを入力してください</h2>
-        <textarea onChange={triggerOnChangeEvent} maxLength={219}></textarea>
-        {!isValidLineLength && <p id="warn">(40pxの場合)1行は27文字以内にしてください</p>}
+        <textarea onChange={triggerOnChangeEvent} maxLength={100}></textarea>
+        {!isValidLineLength && <p id="warn">(60pxの場合)1行は{LINE_LENGTH}文字以内にしてください</p>}
         <h2>メッセージのフォントサイズを選択してください</h2>
-        <select onChange={onMessageFontSizeChange}>
+        <select onChange={onMessageFontSizeChange} value={60}>
           <option value="40">40px</option>
           <option value="50">50px</option>
           <option value="60">60px</option>

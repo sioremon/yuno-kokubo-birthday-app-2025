@@ -40,7 +40,7 @@
   font-size: 30px; /* フォントサイズを20pxに設定 */
   padding: 10px;
   box-sizing: border-box;
-  resize: none; /* テキストエリアのサイズ変更を無効化する場合 */
+  resize: vertical; /* テキストエリアのサイズ変更を無効化する場合 */
   overflow: auto; /* スクロールバーを表示する */
   line-break: anywhere; /* テキストの改行方法を指定 */
 }
@@ -71,3 +71,4 @@ ul {
   list-style: none;
   font-size: 20px;
 }
+
