@@ -83,19 +83,19 @@ function App() {
   
   const scale = stageSize / BASE_SIZE;
 
-  useEffect(() => {
-    const loadFont = async () => {
-      const font = new FontFace('Yusei Magic', 'url(https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap)')
-      await font.load()
-      document.fonts.add(font)
+  // useEffect(() => {
+  //   const loadFont = async () => {
+  //     const font = new FontFace('uzura', 'url(./assets/fonts/uzura.ttf)')
+  //     await font.load()
+  //     document.fonts.add(font)
       
-      // Redraw the canvas once the font is loaded
-      if (stageRef.current) {
-        stageRef.current.draw()
-      }
-    }
-    loadFont()
-  }, [])
+  //     // Redraw the canvas once the font is loaded
+  //     if (stageRef.current) {
+  //       stageRef.current.draw()
+  //     }
+  //   }
+  //   loadFont()
+  // }, [])
   
   return (
     <>
@@ -118,8 +118,8 @@ function App() {
       >
           <Layer>
           {Card()}
-          <Text text={message} fontSize={messageFontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/6} y={stageSize/3.5} width={1080} height={1080} draggable={true}/>
-          <Text text={name} fontSize={nameFontSize} fill='black' fontFamily='Yusei Magic' x={stageSize/2} y={stageSize/2} width={1080} height={1080} draggable={true}/>
+          <Text text={message} fontSize={messageFontSize} fill='black' fontFamily='uzura' x={stageSize/6} y={stageSize/3.5} width={1080} height={1080} draggable={true}/>
+          <Text text={name} fontSize={nameFontSize} fill='black' fontFamily='uzura' x={stageSize/2} y={stageSize/2} width={1080} height={1080} draggable={true}/>
           </Layer>
         </Stage>
       </div>
