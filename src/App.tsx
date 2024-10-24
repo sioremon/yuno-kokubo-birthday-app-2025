@@ -18,7 +18,7 @@ function App() {
   const stageRef = useRef<Konva.Stage>(null)
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messageFontSize, setMessageFontSize] = useState(60)
-  const [nameFontSize, setNameFontSize] = useState(20)
+  const [nameFontSize, setNameFontSize] = useState(40)
 
   // メッセージカードのフォントサイズを変更する関数
   const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
@@ -114,7 +114,7 @@ function App() {
         <h2>名前を入力してください</h2>
         <textarea onChange={(e) => setName(e.target.value)} maxLength={45}></textarea>
         <h2>名前のフォントサイズを選択してください</h2>
-        <select onChange={onNameFontSizeChange}>
+        <select onChange={onNameFontSizeChange} value={40}>
           <option value="20">20px</option>
           <option value="30">30px</option>
           <option value="40">40px</option>
