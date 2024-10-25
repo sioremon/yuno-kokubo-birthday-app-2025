@@ -114,7 +114,7 @@ function App() {
         <h2>名前を入力してください</h2>
         <textarea onChange={(e) => setName(e.target.value)} maxLength={45}></textarea>
         <h2>名前のフォントサイズを選択してください</h2>
-        <select onChange={onNameFontSizeChange} value={40}>
+        <select onChange={onNameFontSizeChange} value={nameFontSize}>
           <option value="20">20px</option>
           <option value="30">30px</option>
           <option value="40">40px</option>
@@ -129,7 +129,7 @@ function App() {
         <textarea onChange={triggerOnChangeEvent} maxLength={100}></textarea>
         {!isValidLineLength && <p id="warn">(60pxの場合)1行は{LINE_LENGTH}文字以内にしてください</p>}
         <h2>メッセージのフォントサイズを選択してください</h2>
-        <select onChange={onMessageFontSizeChange} value={60}>
+        <select onChange={onMessageFontSizeChange} value={messageFontSize}>
           <option value="40">40px</option>
           <option value="50">50px</option>
           <option value="60">60px</option>
