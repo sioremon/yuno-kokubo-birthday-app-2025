@@ -352,8 +352,8 @@ function App() {
         {/* <button onClick={download} className='"bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-500 rounded-full dark:text-white"'>ダウンロード!</button> */}
       </div>
       <div>
-        <p className='text-lg'>このページは私立恵比寿中学のファン有志によって作成されました. 私立恵比寿中学公式とは無関係です</p>
-        <p className='text-2xl'>Contact</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl'>このページは私立恵比寿中学のファン有志によって作成されました. 私立恵比寿中学公式とは無関係です</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl'>Contact</p>
         <ul>
           <li>GitHub: <a href="https://github.com/sioremon">@sioremon</a></li>
           <li>Mail: <a href="mailto:sioremon@sioremon.dev">sioremon [at] sioremon.dev</a></li>
