@@ -128,7 +128,7 @@ function App() {
           {/* <option value="100">100px</option> */}
         </select>
         <h2>メッセージを入力してください</h2>
-        <textarea onChange={triggerOnChangeEvent} maxLength={100}></textarea>
+        <textarea onChange={triggerOnChangeEvent} maxLength={110}></textarea>
         {!isValidLineLength && <p id="warn">(60pxの場合)1行は{LINE_LENGTH}文字以内にしてください</p>}
         <h2>メッセージのフォントサイズを選択してください</h2>
         <select onChange={onMessageFontSizeChange} value={messageFontSize}>
