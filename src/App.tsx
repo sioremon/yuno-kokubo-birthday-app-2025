@@ -132,7 +132,7 @@ function App() {
 
   return (
     <>
-    <div ref={divRef} className="items-center p-4" >
+    <div ref={divRef} className="p-4" >
       <h1 className='text-5xl mb-6'>中山莉子生誕企画 メッセージカード</h1>
       <div className='mb-16'>
         <p className='text-3xl  mb-6 text-red-500'>端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
