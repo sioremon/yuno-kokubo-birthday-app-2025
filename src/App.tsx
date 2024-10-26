@@ -117,6 +117,7 @@ function App() {
         <select onChange={onNameFontSizeChange} value={nameFontSize}>
           <option value="20">20px</option>
           <option value="30">30px</option>
+          <option value="35">35px</option>
           <option value="40">40px</option>
           <option value="45">45px</option>
           <option value="50">50px</option>
