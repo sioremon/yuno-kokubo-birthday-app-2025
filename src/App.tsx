@@ -15,11 +15,14 @@ function App() {
   const [stageSize, setStageSize] = useState(0)
   const divRef = useRef<HTMLDivElement>(null)
   const {width} = useWindowSize()
+  const [messagePosition, setMessagePosition] = useState({ x: stageSize, y: stageSize});
+  const [namePosition, setNamePosition] = useState({ x: stageSize, y: stageSize});
   const stageRef = useRef<Konva.Stage>(null)
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messageFontSize, setMessageFontSize] = useState(60)
   const [nameFontSize, setNameFontSize] = useState(40)
-
+  
+  
   // メッセージカードのフォントサイズを変更する関数
   const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
     setMessageFontSize(Number(e.target.value))
@@ -37,11 +40,9 @@ function App() {
     // messageの状態管理をuseEffectで行う
   useEffect(() => {
     if (!isValidTextLength(message)) {
-      setIsValidLineLength(false);
-      console.log(isValidLineLength);
+      setIsValidLineLength(false);      
     } else {
       setIsValidLineLength(true);
-      console.log(isValidLineLength);
     }
   }, [isValidLineLength, message]);
   // メッセージカードをダウンロードする関数
@@ -51,8 +52,6 @@ function App() {
     }
     const link = document.createElement("a");
     link.download = `${name}.png`;
-    console.log('stageRef.current.width');
-    console.log(typeof(stageRef.current.width()));
     // 原寸大でダウンロードする
     link.href = stageRef.current.toDataURL({ pixelRatio: Math.pow((stageRef.current.width()/BASE_SIZE),-1) });
     document.body.appendChild(link);
@@ -69,23 +68,49 @@ function App() {
     const lineLengths = lines.map((line) => line.length);
     return lineLengths.every((lineLength) => lineLength <= LINE_LENGTH);
   }
+
+  // ドラッグ操作の境界を画像内に制限する関数
+  const messageDragBound = (pos: Konva.Vector2d): Konva.Vector2d => {
+      // posが0以上かつ画像を越えないならposを返す
+      if (!stageRef.current) {
+        return pos;
+      }
+      // console.log(stageRef.current.width(), stageRef.current.height());
+      const x = Math.max(0, Math.min(stageRef.current.width() - messageFontSize, pos.x));
+      const y = Math.max(0, Math.min(stageRef.current.height() - messageFontSize, pos.y));
+      console.log(x, y);
+      return { x, y };
+    }
+  const nameDragBound = (pos: Konva.Vector2d): Konva.Vector2d => {
+    // posが0以上かつ画像を越えないならposを返す
+    if (!stageRef.current) {
+      return pos;
+    }
+    // console.log(stageRef.current.width(), stageRef.current.height());
+    const x = Math.max(0, Math.min(stageRef.current.width() - nameFontSize, pos.x));
+    const y = Math.max(0, Math.min(stageRef.current.height() - nameFontSize, pos.y));
+    console.log(x, y);
+    return { x, y };
+  }
   // カードの画像を読み込む関数
   const Card = () =>{ // Rename 'card' to 'Card'
     const [img] = useImage(card1) // Change type of 'img' to 'HTMLImageElement | undefined'
+
     return <Image image={img} />
   }
 
+  
 
   useEffect(() => {
     if (divRef.current){
-    return setStageSize(divRef.current?.clientWidth || 0);
+      
+      setStageSize(divRef.current.clientWidth);
     }
   }, [width]);
   
   const scale = stageSize / BASE_SIZE;
-
-
   
+
   return (
     <>
     <div ref={divRef}>
@@ -108,8 +133,42 @@ function App() {
       >
           <Layer>
           {Card()}
-          <Text text={message} fontSize={messageFontSize} fill='black' fontFamily='uzura' x={stageSize/6} y={stageSize/3.5} width={BASE_SIZE} height={BASE_SIZE} draggable={true}/>
-          <Text text={name} fontSize={nameFontSize} fill='black' fontFamily='uzura' x={stageSize/2} y={stageSize/2} width={BASE_SIZE} height={BASE_SIZE} draggable={true}/>
+          <Text
+              text={message}
+              fontSize={messageFontSize}
+              fill="black"
+              fontFamily="uzura"
+              x={messagePosition.x}
+              y={messagePosition.y}
+              width={message.length * messageFontSize}
+              height={messageFontSize}
+              draggable={true}
+              dragBoundFunc={messageDragBound}
+              onDragMove={(e) => {
+                setMessagePosition({
+                  x: e.target.x(),
+                  y: e.target.y(),
+                });
+              }}
+            />
+            <Text
+              text={name}
+              fontSize={nameFontSize}
+              fill="black"
+              fontFamily="uzura"
+              x={namePosition.x}
+              y={namePosition.y}
+              width={name.length * nameFontSize}
+              height={nameFontSize}
+              draggable={true}
+              dragBoundFunc={nameDragBound}
+              onDragMove={(e) => {
+                setNamePosition({
+                  x: e.target.x(),
+                  y: e.target.y(),
+                });
+              }}
+            />
           </Layer>
         </Stage>
       </div>
