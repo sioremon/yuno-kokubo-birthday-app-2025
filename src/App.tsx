@@ -50,12 +50,13 @@ function App() {
       return;
     }
     const link = document.createElement("a");
+    console.log(`name: ${name}`);
     link.download = `${name}.png`;
     link.href = stageRef.current.toDataURL();
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }, [stageRef]);
+  }, [name, stageRef]);
 
 
   // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
