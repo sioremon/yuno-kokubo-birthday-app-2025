@@ -50,7 +50,7 @@ function App() {
       return;
     }
     const link = document.createElement("a");
-    link.download = "stage.png";
+    link.download = `${name}.png`;
     link.href = stageRef.current.toDataURL();
     document.body.appendChild(link);
     link.click();
