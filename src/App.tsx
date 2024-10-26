@@ -201,7 +201,7 @@ function App() {
       </div>
 
       <div>
-        <label htmlFor="message" className="block mb-4 text-3xl font-medium text-gray-900 dark:text-white">名前を入力</label>
+        <label htmlFor="message" className="block mb-4 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">名前を入力</label>
         <textarea onChange={(e) => setName(e.target.value)} maxLength={45} id='nameTextArea' 
         rows={1}
         className="
@@ -231,7 +231,7 @@ function App() {
         placeholder="名前を入力"></textarea>
 
 
-        <label htmlFor="message" className="block mb-4 text-3xl font-medium text-gray-900 dark:text-white">文字サイズ</label>
+        <label htmlFor="message" className="block mb-4 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">文字サイズ</label>
         <form className="max-w-sm mx-auto">
           <select onChange={onNameFontSizeChange} value={nameFontSize} 
             className="
@@ -270,7 +270,7 @@ function App() {
           </select>
         </form>
           <div>
-            <label htmlFor="message" className="block mb-6 text-3xl font-medium text-gray-900 dark:text-white">メッセージを入力</label>
+            <label htmlFor="message" className="block mb-6 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">メッセージを入力</label>
 
             <textarea onChange={triggerOnChangeEvent} maxLength={110} id='messageTextArea' rows={8}
               className="
@@ -301,7 +301,7 @@ function App() {
 
             {!isValidLineLength && lineLengthAlert()}
 
-            <label htmlFor="message" className="block mb-6 text-3xl font-medium text-gray-900 dark:text-white">文字サイズ</label>
+            <label htmlFor="message" className="block mb-6 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">文字サイズ</label>
             <form className="max-w-sm mx-auto">
               <select onChange={onMessageFontSizeChange} value={messageFontSize} 
               className="
