@@ -133,7 +133,7 @@ function App() {
   return (
     <>
     <div ref={divRef} className="items-center  p-4" >
-      <h1 className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>中山莉子生誕企画 メッセージカード</h1>
+      <h1 className='text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-6'>中山莉子生誕企画 メッセージカード</h1>
       <div className='mb-16'>
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl  mb-6 text-red-500'>端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>推奨ブラウザはChromeです. Safari上では期待通りに動作しない可能性があります. </p>
