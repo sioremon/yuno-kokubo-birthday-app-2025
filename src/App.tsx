@@ -283,7 +283,8 @@ function App() {
               dark:text-white 
               dark:focus:ring-blue-500 
               dark:focus:border-blue-500
-            " ></textarea>
+            " 
+            placeholder="メッセージを入力"></textarea>
 
             {!isValidLineLength && lineLengthAlert()}
             
