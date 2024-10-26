@@ -8,6 +8,9 @@ on:
         paths: 
             - 'src/**'
             - '.github/workflows/github-pages.yml'
+            - 'package.json'
+            - '*config.js'
+
 
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
