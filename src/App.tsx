@@ -21,8 +21,8 @@ function App() {
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messageFontSize, setMessageFontSize] = useState(60)
   const [nameFontSize, setNameFontSize] = useState(40)
-  
-  
+
+
   // メッセージカードのフォントサイズを変更する関数
   const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
     setMessageFontSize(Number(e.target.value))
@@ -99,7 +99,7 @@ function App() {
 
     return <Image image={img} />
   }
-  
+
   // メッセージの改行の数をカウントする関数
   const countLineBreaks = (text: string) => {
     return text.split('\n').length - 1;
@@ -122,17 +122,17 @@ function App() {
 
   useEffect(() => {
     if (divRef.current){
-      
+
       setStageSize(divRef.current.clientWidth);
     }
   }, [width]);
-  
+
   const scale = stageSize / BASE_SIZE;
-  
+
 
   return (
     <>
-    <div ref={divRef} className="p-4" >
+    <div ref={divRef} className="items-center p-4" >
       <h1 className='text-5xl mb-6'>中山莉子生誕企画 メッセージカード</h1>
       <div className='mb-16'>
         <p className='text-3xl  mb-6 text-red-500'>端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
@@ -287,7 +287,7 @@ function App() {
             placeholder="メッセージを入力"></textarea>
 
             {!isValidLineLength && lineLengthAlert()}
-            
+
             <label htmlFor="message" className="block mb-6 text-3xl font-medium text-gray-900 dark:text-white">文字サイズ</label>
             <form className="max-w-sm mx-auto">
               <select onChange={onMessageFontSizeChange} value={messageFontSize} 
@@ -331,7 +331,7 @@ function App() {
               </select>
             </form>
           </div>
-        
+
         {/* <button onClick={download} className='"bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-500 rounded-full dark:text-white"'>ダウンロード!</button> */}
       </div>
       <div>
