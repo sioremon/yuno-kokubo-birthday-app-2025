@@ -21,7 +21,7 @@ function App() {
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messageFontSize, setMessageFontSize] = useState(60)
   const [nameFontSize, setNameFontSize] = useState(40)
-  const stageCssClass = `items-center max-w-[${BASE_SIZE}] mb-9`
+  const stageCssClass = `max-w-[${BASE_SIZE}] mb-9`
 
   // メッセージカードのフォントサイズを変更する関数
   const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
@@ -156,6 +156,7 @@ function App() {
           ref={stageRef} 
           scaleX={scale} 
           scaleY={scale}
+          offset={{ x: 0, y: 0 }}
         >
             <Layer>
             {Card()}
