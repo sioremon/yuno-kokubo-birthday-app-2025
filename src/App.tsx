@@ -167,7 +167,7 @@ function App() {
                 x={messagePosition.x}
                 y={messagePosition.y}
                 width={message.length * messageFontSize}
-                height={messageFontSize * (countLineBreaks(message)+2)}
+                height={messageFontSize * (countLineBreaks(message)+2.5)}
                 draggable={true}
                 dragBoundFunc={messageDragBound}
                 onDragMove={(e) => {
@@ -185,7 +185,7 @@ function App() {
                 x={namePosition.x}
                 y={namePosition.y}
                 width={name.length * nameFontSize}
-                height={nameFontSize * (countLineBreaks(name)+2)}
+                height={nameFontSize * (countLineBreaks(name)+2.5)}
                 draggable={true}
                 dragBoundFunc={nameDragBound}
                 onDragMove={(e) => {
