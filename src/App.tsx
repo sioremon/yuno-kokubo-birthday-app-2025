@@ -105,8 +105,8 @@ function App() {
       >
           <Layer>
           {Card()}
-          <Text text={message} fontSize={messageFontSize} fill='black' fontFamily='uzura' x={stageSize/2} y={stageSize/3} width={BASE_SIZE} height={BASE_SIZE} draggable={true}/>
-          <Text text={name} fontSize={nameFontSize} fill='black' fontFamily='uzura' x={stageSize/2} y={stageSize} width={BASE_SIZE} height={BASE_SIZE} draggable={true}/>
+          <Text text={message} fontSize={messageFontSize} fill='black' fontFamily='uzura' x={stageSize/6} y={stageSize/3.5} width={BASE_SIZE} height={BASE_SIZE} draggable={true}/>
+          <Text text={name} fontSize={nameFontSize} fill='black' fontFamily='uzura' x={stageSize/2} y={stageSize/2} width={BASE_SIZE} height={BASE_SIZE} draggable={true}/>
           </Layer>
         </Stage>
       </div>
