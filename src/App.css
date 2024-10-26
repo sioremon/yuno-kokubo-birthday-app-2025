@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Yusei+Magic&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
