@@ -21,7 +21,7 @@ function App() {
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messageFontSize, setMessageFontSize] = useState(60)
   const [nameFontSize, setNameFontSize] = useState(40)
-
+  const stageCssClass = `items-center max-w-[${BASE_SIZE}] mb-9`
 
   // メッセージカードのフォントサイズを変更する関数
   const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
@@ -132,16 +132,16 @@ function App() {
 
   return (
     <>
-    <div ref={divRef} className="items-center p-4" >
-      <h1 className='text-5xl mb-6'>中山莉子生誕企画 メッセージカード</h1>
+    <div ref={divRef} className="items-center  p-4" >
+      <h1 className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>中山莉子生誕企画 メッセージカード</h1>
       <div className='mb-16'>
-        <p className='text-3xl  mb-6 text-red-500'>端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
-        <p className='text-3xl mb-6'>推奨ブラウザはChromeです. Safari上では期待通りに動作しない可能性があります. </p>
-        <p className='text-3xl mb-6'>メッセージは100文字まで入力できます</p>
-        <p className='text-3xl mb-6'>1行17文字を目安に改行してください(40pxの場合)</p>
-        <p className='text-3xl mb-6'>絵文字は非推奨です. </p>
-        <p className='text-3xl mb-6'>表示された文字は画像の中で動かすことができます</p>
-        <p className='text-3xl mb-6'>メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl  mb-6 text-red-500'>端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>推奨ブラウザはChromeです. Safari上では期待通りに動作しない可能性があります. </p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>メッセージは100文字まで入力できます</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>1行17文字を目安に改行してください(40pxの場合)</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>絵文字は非推奨です. </p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>表示された文字は画像の中で動かすことができます</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください</p>
       </div>
       <div className='mb-11'>
         <button onClick={download} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
@@ -149,7 +149,7 @@ function App() {
           <span>画像をダウンロード</span>
         </button>
       </div>
-      <div className='mb-9'>
+      <div className={stageCssClass}>
         <Stage 
           width={stageSize} 
           height={stageSize} 
