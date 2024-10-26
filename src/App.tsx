@@ -8,7 +8,7 @@ import './App.css'
 
 function App() {
   const BASE_SIZE = 1280
-  const LINE_LENGTH = 17
+  const LINE_LENGTH = 19
 
   const [message, setMessage] = useState('')
   const [name, setName] = useState('')
