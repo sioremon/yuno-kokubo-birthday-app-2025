@@ -50,13 +50,15 @@ function App() {
       return;
     }
     const link = document.createElement("a");
-    console.log(`name: ${name}`);
     link.download = `${name}.png`;
-    link.href = stageRef.current.toDataURL();
+    console.log('stageRef.current.width');
+    console.log(typeof(stageRef.current.width()));
+    // 原寸大でダウンロードする
+    link.href = stageRef.current.toDataURL({ pixelRatio: Math.pow((stageRef.current.width()/BASE_SIZE),-1) });
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }, [name, stageRef]);
+  }, [stageRef,BASE_SIZE,name]);
 
 
   // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
