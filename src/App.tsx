@@ -209,7 +209,11 @@ function App() {
           block 
           p-2.5 
           w-full 
-          text-3xl
+          text-base 
+          sm:text-sm 
+          md:text-xl 
+          lg:text-2xl 
+          xl:text-3xl
           text-gray-900 
           bg-transparent 
           rounded-lg 
@@ -264,14 +268,18 @@ function App() {
             <label htmlFor="message" className="block mb-6 text-3xl font-medium text-gray-900 dark:text-white">メッセージを入力</label>
 
             <textarea onChange={triggerOnChangeEvent} maxLength={110} id='messageTextArea' rows={8}
-            className="
+              className="
               mb-9
               block 
               p-2.5 
               w-full 
-              text-3xl
+              text-base 
+              sm:text-sm 
+              md:text-xl 
+              lg:text-2xl 
+              xl:text-3xl
               text-gray-900 
-              bg-transparent
+              bg-transparent 
               rounded-lg 
               border 
               border-gray-300 
