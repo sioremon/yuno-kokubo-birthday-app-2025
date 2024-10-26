@@ -118,7 +118,9 @@ function App() {
           <option value="20">20px</option>
           <option value="30">30px</option>
           <option value="40">40px</option>
+          <option value="45">45px</option>
           <option value="50">50px</option>
+          <option value="55">55px</option>
           <option value="60">60px</option>
           <option value="70">70px</option>
           <option value="80">80px</option>
@@ -131,7 +133,9 @@ function App() {
         <h2>メッセージのフォントサイズを選択してください</h2>
         <select onChange={onMessageFontSizeChange} value={messageFontSize}>
           <option value="40">40px</option>
+          <option value="45">45px</option>
           <option value="50">50px</option>
+          <option value="55">55px</option>
           <option value="60">60px</option>
           <option value="70">70px</option>
           <option value="80">80px</option>
