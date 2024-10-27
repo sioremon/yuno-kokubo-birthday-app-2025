@@ -180,7 +180,7 @@ function App() {
             <Text
                 text={message}
                 fontSize={messageFontSize}
-                fill="#21A0DB"
+                fill=""
                 fontFamily="uzura"
                 x={messagePosition.x}
                 y={messagePosition.y}
@@ -198,7 +198,7 @@ function App() {
               <Text
                 text={name}
                 fontSize={nameFontSize}
-                fill="#21A0DB"
+                fill="black"
                 fontFamily="uzura"
                 x={namePosition.x}
                 y={namePosition.y}
