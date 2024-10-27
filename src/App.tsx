@@ -24,64 +24,62 @@ function App() {
   const [messageFontSize, setMessageFontSize] = useState(60)
   const [nameFontSize, setNameFontSize] = useState(40)
   const stageCssClass = `items-center max-w-[${baseSize}] mb-9`
-  
-  // カードの画像を読み込む関数
-  const Card = () =>{ // Rename 'card' to 'Card'
-    const [img] = useImage(card) // Change type of 'img' to 'HTMLImageElement | undefined'
-    
-    useEffect(() => {
-      if (img) {
-        setBaseSize(img.width)
-      }
-    }, [img])
 
+  console.log('re rendered')
+
+  // カードの画像を読み込む関数
+  const [img] = useImage(card)
+  useEffect(() => {
+    if (img) {
+      setBaseSize(img.width)
+    }
+  }, [img])
+
+  const Card = () => {
     return <Image image={img} />
   }
 
-  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  // テキストエリアの文字数をあれこれする関数
-
-  // メッセージカードのフォントサイズを変更する関数
-  const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
-    setMessageFontSize(Number(e.target.value))
-  },[])
-
-  // 名前のフォントサイズを変更する関数
-  const onNameFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
-    setNameFontSize(Number(e.target.value))
-  }, [])
-
-  // テキストエリアに入力されたテキストを読み取り, メッセージカードのテキストを更新する関数
-  const triggerOnChangeEvent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>)=>{
-    console.log(e.target.value)
-    setMessage(e.target.value)
-  }, [])
-
+  // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // メッセージの変更系の関数
   // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
-  const isValidTextLength=(text: string)=> {
+  const isValidTextLength = useCallback((text: string) => {
+    console.log('isValidTextLength')
     // 1行あたりの文字数をカウントする
     const lines = text.split('\n');
     // スプレッド演算子で配列を展開し, 1行あたりの文字数をカウントする
     const lineLengths = lines.map((line) => line.length);
     return lineLengths.every((lineLength) => lineLength <= LINE_LENGTH);
-  }
+  }, [LINE_LENGTH]);
 
-  // これがないとmessageの文字数が変わってもisValidLineLengthが期待通り更新されない
+  // messageの状態管理をuseEffectで行う
   useEffect(() => {
+    console.log('useEffect message')
     if (!isValidTextLength(message)) {
-      setIsValidLineLength(false);      
+      setIsValidLineLength(false);
     } else {
       setIsValidLineLength(true);
     }
-  }, [isValidLineLength, message]);
-  
-  // 改行の数をカウントする関数
-  const countLineBreaks = (text: string) => {
-    return text.split('\n').length - 1;
-  }
+  }, [message, isValidTextLength]);
 
-  // 1行がLINE_LENGTH文字以内かどうかを判定し, 違反している場合はアラートを表示する関数
-  const lineLengthAlert = () => {
+  // メッセージの改行の数をカウントする関数
+  // useCallbackを使ってキャッシュする
+  // const countNameLineBreaks = useCallback(() => {
+  //   console.log('countNameLineBreaks')
+  //   return name.split('\n').length - 1;
+  // }, [name])
+
+
+
+  // 改行の数をカウントする関数
+  const countLineBreaks = useCallback((text:string) => {
+    console.log('countLineBreaks')
+    console.log(text.split('\n').length - 1)
+    return text.split('\n').length - 1;
+  }, [])
+
+
+  const lineLengthAlert = useCallback(() => {
+    console.log('lineLengthAlert')
     if (!isValidLineLength) {
       return (
       <div className="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
@@ -94,9 +92,9 @@ function App() {
         </div>
       </div>)
     }
-  }
+  }, [isValidLineLength, LINE_LENGTH])
 
-  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // メッセージカードをダウンロードする関数
   const download = useCallback(() => {
     if (!stageRef.current) {
@@ -105,27 +103,33 @@ function App() {
     const link = document.createElement("a");
     link.download = `${name}.png`;
     // 原寸大でダウンロードする
-    
+
     link.href = stageRef.current.toDataURL({ pixelRatio: Math.pow((stageRef.current.width()/baseSize),-1) });
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }, [stageRef,baseSize,name]);
 
-  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // ドラッグ操作
+
   // ドラッグ操作の境界を画像内に制限する関数
-  const messageDragBound = (pos: Konva.Vector2d): Konva.Vector2d => {
-      // posが0以上かつ画像を越えないならposを返す
-      if (!stageRef.current) {
-        return pos;
-      }
-      // console.log(stageRef.current.width(), stageRef.current.height());
-      const x = Math.max(0, Math.min(stageRef.current.width() - messageFontSize, pos.x));
-      const y = Math.max(0, Math.min(stageRef.current.height() - messageFontSize, pos.y));
-      console.log(x, y);
-      return { x, y };
+  const messageDragBound = useCallback((pos: Konva.Vector2d): Konva.Vector2d => {
+    console.log('messageDragBound')
+    // posが0以上かつ画像を越えないならposを返す
+    if (!stageRef.current) {
+      return pos;
     }
-  const nameDragBound = (pos: Konva.Vector2d): Konva.Vector2d => {
+    // console.log(stageRef.current.width(), stageRef.current.height());
+    const x = Math.max(0, Math.min(stageRef.current.width() - messageFontSize, pos.x));
+    const y = Math.max(0, Math.min(stageRef.current.height() - messageFontSize, pos.y));
+    console.log(x, y);
+    return { x, y };
+  }, [messageFontSize, stageRef])
+
+  // ドラッグ操作の境界を画像内に制限する関数
+  const nameDragBound = useCallback((pos: Konva.Vector2d): Konva.Vector2d => {
+    console.log('nameDragBound')
     // posが0以上かつ画像を越えないならposを返す
     if (!stageRef.current) {
       return pos;
@@ -135,11 +139,12 @@ function App() {
     const y = Math.max(0, Math.min(stageRef.current.height() - nameFontSize, pos.y));
     console.log(x, y);
     return { x, y };
-  }
-  
-  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  }, [nameFontSize, stageRef])
+
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // widthが変更されたときにstageSizeを更新する
   useEffect(() => {
+    console.log('useEffect divRef')
     if (divRef.current) {
       setStageSize(divRef.current.offsetWidth);
     }
@@ -147,7 +152,7 @@ function App() {
 
   const scale = stageSize / baseSize;
 
-  
+
   return (
     <>
     <div className="items-center p-4" >
@@ -168,11 +173,11 @@ function App() {
         </button>
       </div>
       <div ref={divRef} className={stageCssClass}>
-        <Stage 
-          width={stageSize} 
-          height={stageSize} 
-          ref={stageRef} 
-          scaleX={scale} 
+        <Stage
+          width={stageSize}
+          height={stageSize}
+          ref={stageRef}
+          scaleX={scale}
           scaleY={scale}
         >
             <Layer>
@@ -180,7 +185,7 @@ function App() {
             <Text
                 text={message}
                 fontSize={messageFontSize}
-                fill=""
+                fill="#21A0DB"
                 fontFamily="uzura"
                 x={messagePosition.x}
                 y={messagePosition.y}
@@ -198,7 +203,7 @@ function App() {
               <Text
                 text={name}
                 fontSize={nameFontSize}
-                fill="black"
+                fill="#21A0DB"
                 fontFamily="uzura"
                 x={namePosition.x}
                 y={namePosition.y}
@@ -220,60 +225,60 @@ function App() {
 
       <div>
         <label htmlFor="message" className="block mb-4 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">名前を入力</label>
-        <textarea onChange={(e) => setName(e.target.value)} maxLength={45} id='nameTextArea' 
+        <textarea onChange={(e) => setName(e.target.value)} maxLength={45} id='nameTextArea'
         rows={1}
         className="
           mb-9
-          block 
-          p-2.5 
-          w-full 
-          text-base 
-          sm:text-sm 
-          md:text-xl 
-          lg:text-2xl 
+          block
+          p-2.5
+          w-full
+          text-base
+          sm:text-sm
+          md:text-xl
+          lg:text-2xl
           xl:text-3xl
-          text-gray-900 
-          bg-transparent 
-          rounded-lg 
-          border 
-          border-gray-300 
-          focus:ring-blue-500 
-          focus:border-blue-500 
-          dark:bg-gray-700 
-          dark:border-gray-600 
-          dark:placeholder-gray-400 
-          dark:text-white 
-          dark:focus:ring-blue-500 
+          text-gray-900
+          bg-transparent
+          rounded-lg
+          border
+          border-gray-300
+          focus:ring-blue-500
+          focus:border-blue-500
+          dark:bg-gray-700
+          dark:border-gray-600
+          dark:placeholder-gray-400
+          dark:text-white
+          dark:focus:ring-blue-500
           dark:focus:border-blue-500
-        " 
+        "
         placeholder="名前を入力"></textarea>
 
 
         <label htmlFor="message" className="block mb-4 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">文字サイズ</label>
         <form className="max-w-sm mx-auto">
-          <select onChange={onNameFontSizeChange} value={nameFontSize} 
+          <select onChange={(e) => setNameFontSize(Number(e.target.value))} value={nameFontSize}
             className="
-            mb-24 
-            bg-gray-50 
-            border 
-            border-gray-300 
-            text-gray-900 
-            text-base 
-            sm:text-sm 
-            md:text-xl 
-            lg:text-2xl 
+            mb-24
+            bg-gray-50
+            border
+            border-gray-300
+            text-gray-900
+            text-base
+            sm:text-sm
+            md:text-xl
+            lg:text-2xl
             xl:text-3xl
-            rounded-lg 
-            focus:ring-blue-500 
-            focus:border-blue-500 
-            block 
-            w-full 
-            p-2.5 
-            dark:bg-gray-700 
-            dark:border-gray-600 
-            dark:placeholder-gray-400 
-            dark:text-white 
-            dark:focus:ring-blue-500 
+            rounded-lg
+            focus:ring-blue-500
+            focus:border-blue-500
+            block
+            w-full
+            p-2.5
+            dark:bg-gray-700
+            dark:border-gray-600
+            dark:placeholder-gray-400
+            dark:text-white
+            dark:focus:ring-blue-500
             dark:focus:border-blue-500
           ">
             <option value="20">20px</option>
@@ -290,60 +295,60 @@ function App() {
           <div>
             <label htmlFor="message" className="block mb-6 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">メッセージを入力</label>
 
-            <textarea onChange={triggerOnChangeEvent} maxLength={110} id='messageTextArea' rows={8}
+            <textarea onChange={(e) => setMessage(e.target.value)} maxLength={110} id='messageTextArea' rows={8}
               className="
               mb-9
-              block 
-              p-2.5 
-              w-full 
-              text-base 
-              sm:text-sm 
-              md:text-xl 
-              lg:text-2xl 
+              block
+              p-2.5
+              w-full
+              text-base
+              sm:text-sm
+              md:text-xl
+              lg:text-2xl
               xl:text-3xl
-              text-gray-900 
-              bg-transparent 
-              rounded-lg 
-              border 
-              border-gray-300 
-              focus:ring-blue-500 
-              focus:border-blue-500 
-              dark:bg-gray-700 
-              dark:border-gray-600 
-              dark:placeholder-gray-400 
-              dark:text-white 
-              dark:focus:ring-blue-500 
+              text-gray-900
+              bg-transparent
+              rounded-lg
+              border
+              border-gray-300
+              focus:ring-blue-500
+              focus:border-blue-500
+              dark:bg-gray-700
+              dark:border-gray-600
+              dark:placeholder-gray-400
+              dark:text-white
+              dark:focus:ring-blue-500
               dark:focus:border-blue-500
-            " 
+            "
             placeholder="メッセージを入力"></textarea>
 
             {!isValidLineLength && lineLengthAlert()}
 
             <label htmlFor="message" className="block mb-6 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl font-medium text-gray-900 dark:text-white">文字サイズ</label>
             <form className="max-w-sm mx-auto">
-              <select onChange={onMessageFontSizeChange} value={messageFontSize} 
+              <select onChange={(e) => setMessageFontSize(Number(e.target.value))} value={messageFontSize}
               className="
-                mb-24 
-                bg-gray-50 
-                border 
-                border-gray-300 
-                text-gray-900 
-                text-base 
-                sm:text-sm 
-                md:text-xl 
-                lg:text-2xl 
+                mb-24
+                bg-gray-50
+                border
+                border-gray-300
+                text-gray-900
+                text-base
+                sm:text-sm
+                md:text-xl
+                lg:text-2xl
                 xl:text-3xl
-                rounded-lg 
-                focus:ring-blue-500 
-                focus:border-blue-500 
-                block 
-                w-full 
-                p-2.5 
-                dark:bg-gray-700 
-                dark:border-gray-600 
-                dark:placeholder-gray-400 
-                dark:text-white 
-                dark:focus:ring-blue-500 
+                rounded-lg
+                focus:ring-blue-500
+                focus:border-blue-500
+                block
+                w-full
+                p-2.5
+                dark:bg-gray-700
+                dark:border-gray-600
+                dark:placeholder-gray-400
+                dark:text-white
+                dark:focus:ring-blue-500
                 dark:focus:border-blue-500
               ">
                 <option value="40">40px</option>
