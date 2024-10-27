@@ -54,6 +54,7 @@ function App() {
     const link = document.createElement("a");
     link.download = `${name}.png`;
     // 原寸大でダウンロードする
+    
     link.href = stageRef.current.toDataURL({ pixelRatio: Math.pow((stageRef.current.width()/BASE_SIZE),-1) });
     document.body.appendChild(link);
     link.click();
@@ -124,8 +125,6 @@ function App() {
   useEffect(() => {
     if (divRef.current) {
       setStageSize(divRef.current.offsetWidth);
-      console.log('divRef.current.clientWidth', divRef.current.clientWidth)
-      console.log('width', width)
     }
   }, [width]);
 
