@@ -25,18 +25,21 @@ function App() {
   const [nameFontSize, setNameFontSize] = useState(40)
   const stageCssClass = `items-center max-w-[${baseSize}] mb-9`
   
-    // カードの画像を読み込む関数
-    const Card = () =>{ // Rename 'card' to 'Card'
-      const [img] = useImage(card) // Change type of 'img' to 'HTMLImageElement | undefined'
-      
-      useEffect(() => {
-        if (img) {
-          setBaseSize(img.width)
-        }
-      }, [img])
+  // カードの画像を読み込む関数
+  const Card = () =>{ // Rename 'card' to 'Card'
+    const [img] = useImage(card) // Change type of 'img' to 'HTMLImageElement | undefined'
+    
+    useEffect(() => {
+      if (img) {
+        setBaseSize(img.width)
+      }
+    }, [img])
 
-      return <Image image={img} />
-    }
+    return <Image image={img} />
+  }
+
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // テキストエリアの文字数をあれこれする関数
 
   // メッセージカードのフォントサイズを変更する関数
   const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
@@ -53,7 +56,17 @@ function App() {
     console.log(e.target.value)
     setMessage(e.target.value)
   }, [])
-    // messageの状態管理をuseEffectで行う
+
+  // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
+  const isValidTextLength=(text: string)=> {
+    // 1行あたりの文字数をカウントする
+    const lines = text.split('\n');
+    // スプレッド演算子で配列を展開し, 1行あたりの文字数をカウントする
+    const lineLengths = lines.map((line) => line.length);
+    return lineLengths.every((lineLength) => lineLength <= LINE_LENGTH);
+  }
+
+  // これがないとmessageの文字数が変わってもisValidLineLengthが期待通り更新されない
   useEffect(() => {
     if (!isValidTextLength(message)) {
       setIsValidLineLength(false);      
@@ -61,6 +74,28 @@ function App() {
       setIsValidLineLength(true);
     }
   }, [isValidLineLength, message]);
+  
+  // メッセージの改行の数をカウントする関数
+  const countLineBreaks = (text: string) => {
+    return text.split('\n').length - 1;
+  }
+
+  const lineLengthAlert = () => {
+    if (!isValidLineLength) {
+      return (
+      <div className="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+        <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <span className="sr-only">Info</span>
+        <div>
+          <span className="font-medium">1行が長すぎます！</span> 1行は{LINE_LENGTH}文字以内にしてください
+        </div>
+      </div>)
+    }
+  }
+
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // メッセージカードをダウンロードする関数
   const download = useCallback(() => {
     if (!stageRef.current) {
@@ -76,16 +111,7 @@ function App() {
     document.body.removeChild(link);
   }, [stageRef,baseSize,name]);
 
-
-  // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
-  const isValidTextLength=(text: string)=> {
-    // 1行あたりの文字数をカウントする
-    const lines = text.split('\n');
-    // スプレッド演算子で配列を展開し, 1行あたりの文字数をカウントする
-    const lineLengths = lines.map((line) => line.length);
-    return lineLengths.every((lineLength) => lineLength <= LINE_LENGTH);
-  }
-
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // ドラッグ操作の境界を画像内に制限する関数
   const messageDragBound = (pos: Konva.Vector2d): Konva.Vector2d => {
       // posが0以上かつ画像を越えないならposを返す
@@ -109,28 +135,8 @@ function App() {
     console.log(x, y);
     return { x, y };
   }
-
-
-  // メッセージの改行の数をカウントする関数
-  const countLineBreaks = (text: string) => {
-    return text.split('\n').length - 1;
-  }
-
-  const lineLengthAlert = () => {
-    if (!isValidLineLength) {
-      return (
-      <div className="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-        <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-        </svg>
-        <span className="sr-only">Info</span>
-        <div>
-          <span className="font-medium">1行が長すぎます！</span> 1行は{LINE_LENGTH}文字以内にしてください
-        </div>
-      </div>)
-    }
-  }
   
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // widthが変更されたときにstageSizeを更新する
   useEffect(() => {
     if (divRef.current) {
