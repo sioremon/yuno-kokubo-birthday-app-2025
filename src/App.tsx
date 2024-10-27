@@ -75,11 +75,12 @@ function App() {
     }
   }, [isValidLineLength, message]);
   
-  // メッセージの改行の数をカウントする関数
+  // 改行の数をカウントする関数
   const countLineBreaks = (text: string) => {
     return text.split('\n').length - 1;
   }
 
+  // 1行がLINE_LENGTH文字以内かどうかを判定し, 違反している場合はアラートを表示する関数
   const lineLengthAlert = () => {
     if (!isValidLineLength) {
       return (
