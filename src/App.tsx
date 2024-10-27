@@ -149,7 +149,7 @@ function App() {
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl  mb-6 text-red-500'>端末によっては文字が期待通りに表示されない場合があります.(修正中)</p>
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>推奨ブラウザはChromeです. Safari上では期待通りに動作しない可能性があります. </p>
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>メッセージは100文字まで入力できます</p>
-        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>1行17文字を目安に改行してください(40pxの場合)</p>
+        <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>1行{LINE_LENGTH}文字を目安に改行してください(40pxの場合)</p>
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>絵文字は非推奨です. </p>
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>表示された文字は画像の中で動かすことができます</p>
         <p className='text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6'>メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください</p>
