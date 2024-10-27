@@ -1,13 +1,15 @@
 import { useEffect, useState, useRef,useCallback } from 'react'
-import card1 from './assets/2024_message_card.jpg'
+import card from './assets/latest.jpg'
 import {Stage, Layer, Image, Text} from 'react-konva'
 import useImage from 'use-image'
 import { useWindowSize } from 'react-use'
 import Konva from 'konva'
 import './App.css'
 
+
+
 function App() {
-  const BASE_SIZE = 1280
+  const [baseSize, setBaseSize] = useState(1280);
   const LINE_LENGTH = 19
 
   const [message, setMessage] = useState('')
@@ -21,8 +23,21 @@ function App() {
   const [isValidLineLength, setIsValidLineLength] = useState(true)
   const [messageFontSize, setMessageFontSize] = useState(60)
   const [nameFontSize, setNameFontSize] = useState(40)
-  const stageCssClass = `items-center max-w-[${BASE_SIZE}] mb-9`
+  const stageCssClass = `items-center max-w-[${baseSize}] mb-9`
   
+    // カードの画像を読み込む関数
+    const Card = () =>{ // Rename 'card' to 'Card'
+      const [img] = useImage(card) // Change type of 'img' to 'HTMLImageElement | undefined'
+      
+      useEffect(() => {
+        if (img) {
+          setBaseSize(img.width)
+        }
+      }, [img])
+
+      return <Image image={img} />
+    }
+
   // メッセージカードのフォントサイズを変更する関数
   const onMessageFontSizeChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
     setMessageFontSize(Number(e.target.value))
@@ -55,11 +70,11 @@ function App() {
     link.download = `${name}.png`;
     // 原寸大でダウンロードする
     
-    link.href = stageRef.current.toDataURL({ pixelRatio: Math.pow((stageRef.current.width()/BASE_SIZE),-1) });
+    link.href = stageRef.current.toDataURL({ pixelRatio: Math.pow((stageRef.current.width()/baseSize),-1) });
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }, [stageRef,BASE_SIZE,name]);
+  }, [stageRef,baseSize,name]);
 
 
   // 入力されたテキストを読み取り, 1行あたりの文字数をカウントし, 18文字以上の行があればfalseを返す
@@ -94,12 +109,7 @@ function App() {
     console.log(x, y);
     return { x, y };
   }
-  // カードの画像を読み込む関数
-  const Card = () =>{ // Rename 'card' to 'Card'
-    const [img] = useImage(card1) // Change type of 'img' to 'HTMLImageElement | undefined'
 
-    return <Image image={img} />
-  }
 
   // メッセージの改行の数をカウントする関数
   const countLineBreaks = (text: string) => {
@@ -128,7 +138,7 @@ function App() {
     }
   }, [width]);
 
-  const scale = stageSize / BASE_SIZE;
+  const scale = stageSize / baseSize;
 
   
   return (
