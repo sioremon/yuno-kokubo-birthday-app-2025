@@ -5,6 +5,8 @@ import { useWindowSize } from 'react-use';
 import useImage from 'use-image';
 import './App.css';
 import card from './assets/latest.jpg';
+import { Footer } from './components/Footer';
+import { Head } from './components/Head';
 
 function App() {
   const [baseSize, setBaseSize] = useState(1280);
@@ -172,27 +174,7 @@ function App() {
         <h1 className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-6">
           中山莉子生誕企画 メッセージカード
         </h1>
-        <div className="mb-16">
-          <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl  mb-6 text-red-500">
-            端末によっては文字が期待通りに表示されない場合があります.(修正中)
-          </p>
-          <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6">
-            推奨ブラウザはChromeです. Safari上では期待通りに動作しない可能性があります.{' '}
-          </p>
-          <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6">
-            メッセージは100文字まで入力できます
-          </p>
-          <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6">
-            1行{LINE_LENGTH}文字を目安に改行してください(40pxの場合)
-          </p>
-          <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6">絵文字は非推奨です. </p>
-          <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6">
-            表示された文字は画像の中で動かすことができます
-          </p>
-          <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl mb-6">
-            メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください
-          </p>
-        </div>
+        <Head lineLength={LINE_LENGTH} />
         <div className="mb-11">
           <button
             onClick={download}
@@ -434,26 +416,7 @@ function App() {
 
         {/* <button onClick={download} className='"bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 border border-blue-500 rounded-full dark:text-white"'>ダウンロード!</button> */}
       </div>
-      <div>
-        <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl">
-          このページは私立恵比寿中学のファン有志によって作成されました. 私立恵比寿中学公式とは無関係です
-        </p>
-        <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl">Contact</p>
-        <ul>
-          <li>
-            GitHub: <a href="https://github.com/sioremon">@sioremon</a>
-          </li>
-          <li>
-            Mail: <a href="mailto:sioremon@sioremon.dev">sioremon [at] sioremon.dev</a>
-          </li>
-          <li>
-            Repository:{' '}
-            <a href="https://github.com/sioremon/instagram-birthday-event-demo-app">
-              sioremon/instagram-birthday-event-demo-app
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Footer />
     </>
   );
 }
