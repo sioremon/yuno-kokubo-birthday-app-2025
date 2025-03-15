@@ -3,7 +3,7 @@ export const Footer: React.FC = () => (
     <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl">
       このページは私立恵比寿中学のファン有志によって作成されました. 私立恵比寿中学公式とは無関係です
     </p>
-    <p className="text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl">Contact</p>
+    <p className="mt-12 text-base sm:text-sm md:text-xl lg:text-2xl xl:text-3xl">Contact</p>
     <ul>
       <li>
         GitHub: <a href="https://github.com/sioremon">@sioremon</a>
