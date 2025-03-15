@@ -29,7 +29,7 @@ export const Head: React.FC<Props> = ({ lineLength }) => {
             onClick={() => toggleOpenState('usage')}
           >
             <div className="text-center w-full">
-              <p className="text-base sm:text-base md:text-xl lg:text-2xl xl:text-3xl">使い方</p>
+              <p className="text-base sm:text-sm md:text-base lg:text-xl xl:text-2xl">使い方</p>
             </div>
             <svg
               className={`w-4 h-4 transition-transform transform ${openStates.notice ? 'rotate-180' : ''}`}
