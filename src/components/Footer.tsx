@@ -12,9 +12,9 @@ export const Footer: React.FC = () => (
         Mail: <a href="mailto:sioremon@sioremon.dev">sioremon [at] sioremon.dev</a>
       </li>
       <li>
-        Repository:{' '}
-        <a href="https://github.com/sioremon/instagram-birthday-event-demo-app">
-          sioremon/instagram-birthday-event-demo-app
+        X (旧Twiter):{' '}
+        <a href="https://x.com/hellootakuworld">
+          @hellootakuworld
         </a>
       </li>
     </ul>
