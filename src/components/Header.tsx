@@ -18,7 +18,8 @@ export const Head: React.FC<Props> = ({ lineLength }) => {
   return (
     <>
       <h1 className="text-xl sm:text-base md:text-3xl lg:text-4xl xl:text-5xl mb-6">
-        小久保柚乃 生誕企画 <br />メッセージカード
+        小久保柚乃 生誕企画 <br />
+        メッセージカード
       </h1>
       <div className="mb-16">
         {/* 使い方 */}
@@ -103,7 +104,9 @@ export const Head: React.FC<Props> = ({ lineLength }) => {
           </div>
           {openStates.download && (
             <ul>
-              <li className='text-base'>メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください</li>
+              <li className="text-base">
+                メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください
+              </li>
             </ul>
           )}
         </div>
