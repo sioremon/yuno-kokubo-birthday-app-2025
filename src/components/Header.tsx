@@ -7,7 +7,7 @@ interface Props {
 export const Head: React.FC<Props> = ({ lineLength }) => {
   const [openStates, setOpenStates] = useState({
     notice: false,
-    browser: false,
+    usage: false,
     download: false,
   });
 
@@ -25,13 +25,13 @@ export const Head: React.FC<Props> = ({ lineLength }) => {
         <div className="mb-4">
           <div
             className="flex items-center justify-between w-full py-2 px-4 bg-gray-100 rounded-md cursor-pointer"
-            onClick={() => toggleOpenState('browser')}
+            onClick={() => toggleOpenState('usage')}
           >
             <div className="text-center w-full">
               <p className="text-base sm:text-base md:text-xl lg:text-2xl xl:text-3xl">使い方</p>
             </div>
           </div>
-          {openStates.browser && (
+          {openStates.usage && (
             <div className="text-base sm:text-base md:text-xl lg:text-2xl xl:text-3xl mt-2">
               <ul className="list-disc list-outside pl-5">
                 <li className="text-base mt-5">1. メッセージカードを選択します。</li>

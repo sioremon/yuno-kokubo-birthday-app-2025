@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
     "preview": "vite preview",
     "lint": "eslint --cache --cache-location './.cache/.eslintcache' --cache-strategy content '**/*.{ts,tsx}' .",
     "lint-fix": "prettier --cache --cache-location './.cache/.prettier-cache' --write './**/*.{ts,tsx,scss}'",
