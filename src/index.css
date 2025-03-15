@@ -68,13 +68,3 @@ button:focus-visible {
 }
 
 
-ol {
-  list-style-type: decimal; /* 1, 2, 3... の番号を表示 */
-  margin-left: 1rem; /* 左側に余白を追加 */
-}
-
-ol ul {
-  list-style-type: disc; /* • を表示 */
-  margin-left: 2rem; /* インデントを調整 */
-}
-
