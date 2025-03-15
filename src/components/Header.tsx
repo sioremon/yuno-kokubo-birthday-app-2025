@@ -104,7 +104,7 @@ export const Head: React.FC<Props> = () => {
           {openStates.download && (
             <ul>
               <li className="text-base">
-                メッセージを書き終わったらページ下部のダウンロードボタンを押してダウンロードしてください
+                メッセージを書き終わったらダウンロードボタンを押してダウンロードしてください
               </li>
             </ul>
           )}
