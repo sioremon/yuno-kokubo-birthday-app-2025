@@ -77,7 +77,6 @@ export const Head: React.FC<Props> = ({ lineLength }) => {
               <ul className="list-disc list-outside pl-5">
                 <li className="text-base mt-5">推奨ブラウザ: Chrome (Safari上では正常に動作しない可能性があります)</li>
                 <li className="text-base mt-5">メッセージは100文字まで入力できます</li>
-                <li className="text-base mt-5">1行{lineLength}文字を目安に改行してください(40pxの場合)</li>
                 <li className="text-base mt-5">絵文字は非推奨です</li>
               </ul>
             </div>
