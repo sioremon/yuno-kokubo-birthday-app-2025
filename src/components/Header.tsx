@@ -17,9 +17,8 @@ export const Head: React.FC<Props> = () => {
 
   return (
     <>
-      <h1 className="text-base sm:text-base md:text-xl lg:text-3xl mb-6">
-        小久保柚乃 生誕企画 <br />
-        メッセージカード
+      <h1 className="text-base sm:text-base md:text-xl lg:text-3xl break-all mb-6">
+        小久保柚乃 生誕企画 メッセージカード
       </h1>
       <div className="mb-16">
         {/* 使い方 */}
