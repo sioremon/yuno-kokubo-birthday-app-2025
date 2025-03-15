@@ -4,5 +4,5 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/instagram-birthday-event-demo-app/',
+  base: '/yuno-kokubo-birthday-app-2025/',
 });

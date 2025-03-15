@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "lint": "eslint --cache --cache-location './.cache/.eslintcache' --cache-strategy content '**/*.{ts,tsx}' .",
-    "lint-fix:prettier": "prettier --cache --cache-location './.cache/.prettier-cache' --write './**/*.{ts,tsx,scss}'",
+    "lint-fix": "prettier --cache --cache-location './.cache/.prettier-cache' --write './**/*.{ts,tsx,scss}'",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
