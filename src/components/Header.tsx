@@ -30,6 +30,15 @@ export const Head: React.FC<Props> = ({ lineLength }) => {
             <div className="text-center w-full">
               <p className="text-base sm:text-base md:text-xl lg:text-2xl xl:text-3xl">使い方</p>
             </div>
+            <svg
+              className={`w-4 h-4 transition-transform transform ${openStates.notice ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
           {openStates.usage && (
             <div className="text-base sm:text-base md:text-xl lg:text-2xl xl:text-3xl mt-2">
