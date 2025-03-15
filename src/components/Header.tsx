@@ -17,7 +17,7 @@ export const Head: React.FC<Props> = () => {
 
   return (
     <>
-      <h1 className="text- sm:text-base md:text-xl lg:text-3xl mb-6">
+      <h1 className="text-base sm:text-base md:text-xl lg:text-3xl mb-6">
         小久保柚乃 生誕企画 <br />
         メッセージカード
       </h1>
