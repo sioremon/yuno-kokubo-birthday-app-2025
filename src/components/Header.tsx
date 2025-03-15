@@ -17,7 +17,7 @@ export const Head: React.FC<Props> = ({ lineLength }) => {
 
   return (
     <>
-      <h1 className="text-xl sm:text-base md:text-3xl lg:text-4xl xl:text-5xl mb-6">
+      <h1 className="text-base sm:text-base md:text-3xl lg:text-4xl xl:text-5xl mb-6">
         小久保柚乃 生誕企画 <br />
         メッセージカード
       </h1>
