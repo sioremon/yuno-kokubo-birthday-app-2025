@@ -4,7 +4,7 @@ interface Props {
   lineLength: number;
 }
 
-export const Head: React.FC<Props> = ({ lineLength }) => {
+export const Head: React.FC<Props> = () => {
   const [openStates, setOpenStates] = useState({
     notice: false,
     usage: false,
