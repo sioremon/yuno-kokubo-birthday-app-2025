@@ -4,8 +4,8 @@ import { Image, Layer, Stage, Text } from 'react-konva';
 import { useWindowSize } from 'react-use';
 import useImage from 'use-image';
 import './App.css';
-import card1 from './assets/card1.jpg';
-import card2 from './assets/card2.jpg';
+import card1 from './assets/card1.jpeg';
+import card2 from './assets/card2.jpeg';
 import { Footer } from './components/Footer';
 import { Head } from './components/Header';
 
